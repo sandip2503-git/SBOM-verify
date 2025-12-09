@@ -1,0 +1,28 @@
+name: Aqua SBOM Test
+
+on:
+  push:   # we want full repo scan when we push
+    branches:
+      - main
+
+jobs:
+  aqua:
+    name: Aqua scanner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Aqua scanner
+        uses: docker://aquasec/aqua-scanner
+        with:
+          args: trivy fs --scanners config,vuln,secret .
+        env:
+          AQUA_KEY: ${{ secrets.AQUA_KEY }}
+          AQUA_SECRET: ${{ secrets.AQUA_SECRET }}
+          GITHUB_TOKEN: ${{ github.token }}
+          TRIVY_RUN_AS_PLUGIN: 'aqua'
+          # Set these two ONLY if your Aqua env is not US:
+          # AQUA_URL: https://api.eu-1.supply-chain.cloud.aquasec.com
+          # CSPM_URL: https://eu-1.api.cloudsploit.com
