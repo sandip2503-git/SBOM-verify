@@ -25,5 +25,5 @@ jobs:
           TRIVY_RUN_AS_PLUGIN: 'aqua'
           SAST: true
           # Set these two ONLY if your Aqua env is not US:
-          AQUA_URL: https://api.eu-1.supply-chain.cloud.aquasec.com
-          CSPM_URL: https://eu-1.api.cloudsploit.com
+          AQUA_URL: https://api.asia-1.supply-chain.cloud.aquasec.com
+          CSPM_URL: https://asia-1.api.cloudsploit.com
